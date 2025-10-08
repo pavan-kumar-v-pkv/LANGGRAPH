@@ -36,9 +36,9 @@ graph.add_edge('chat_node', END)
 # run graph
 chatbot = graph.compile(checkpointer=checkpointer)
 
-# for message_chunk, metadata in chatbot.stream({'history': [HumanMessage(content='What is the recipe to make pasta')]},
-#                 config=CONFIG,
-#                 stream_mode='messages'
-#                ):
-#     if message_chunk:
-#         print(message_chunk[-1].content, end='', flush=True)
+CONFIG = {'configurable': {'thread_id': 'thread_1'}}
+chatbot.invoke({'history': [HumanMessage(content="Hi im Pavan. How are you?")]},
+                config=CONFIG,
+               )
+
+print(chatbot.get_state(config=CONFIG))
